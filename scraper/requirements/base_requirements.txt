@@ -1,0 +1,4 @@
+scrapy
+requests
+openpyxl
+pandas

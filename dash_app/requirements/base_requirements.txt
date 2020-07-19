@@ -1,0 +1,8 @@
+wheel
+gunicorn 
+flask
+dash
+dash-auth
+plotly
+pandas
+requests

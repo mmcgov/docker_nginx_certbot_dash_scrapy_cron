@@ -1,0 +1,65 @@
+version: '3'
+services:
+
+  scraper:
+    build:
+      context: ./scraper
+    image: mmg/scraper
+    volumes:
+        - ./scraper:/home/scraper
+        - ./data:/home/data
+    working_dir: /home/scraper/scripts
+    entrypoint: ./entrypoint.sh
+    command: cron -f
+
+  dash_app:
+    build:
+        context: ./dash_app
+    image: mmg/dash_app
+    volumes:
+        - ./dash_app:/home/dash_app
+        - ./data:/home/data
+    depends_on:
+        - scraper
+    working_dir: /home/dash_app/scripts
+    entrypoint: ./entrypoint.sh
+    ports:
+        - 8000:8000
+    networks:
+        docker-network:
+
+  certbot:
+    environment:
+       - email=${email}
+       - website=${website}
+       - website_short=${website_short}
+    image: certbot/certbot
+    volumes:
+       - ./certbot/conf:/etc/letsencrypt
+       - ./certbot/www:/var/www/certbot
+    working_dir: /home/certbot/scripts
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  
+  nginx:
+    environment:
+       - email=${email}
+       - website=${website}
+       - website_short=${website_short}
+    image: nginx:1.15-alpine
+    ports:
+       - "80:80"
+       - "443:443"
+    volumes:
+       - ./nginx:/etc/nginx/conf.d
+       - ./certbot/conf:/etc/letsencrypt
+       - ./certbot/www:/var/www/certbot
+    command: "/bin/sh -c 'envsubst < /etc/nginx/conf.d/app.conf.template > /etc/nginx/conf.d/app.conf
+          &&  while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    depends_on:
+        - dash_app
+    networks:
+        - docker-network
+
+networks:
+      docker-network:
+
