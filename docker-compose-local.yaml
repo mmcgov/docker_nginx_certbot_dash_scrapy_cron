@@ -1,0 +1,27 @@
+version: '3'
+services:
+
+  scraper:
+    build:
+      context: ./scraper
+    image: mmg/scraper
+    volumes:
+        - ./scraper:/home/scraper
+        - ./data:/home/data
+    working_dir: /home/scraper/scripts
+    entrypoint: ./entrypoint.sh
+    command: cron -f
+
+  dash_app:
+    build:
+        context: ./dash_app
+    image: mmg/dash_app
+    volumes:
+        - ./dash_app:/home/dash_app
+        - ./data:/home/data
+    depends_on:
+        - scraper
+    working_dir: /home/dash_app/scripts
+    entrypoint: ./entrypoint.sh
+    ports:
+        - 8000:8000

@@ -39,3 +39,8 @@ bash-nginx:
 bash-certbot:
 	docker-compose -f docker-compose.yaml run --rm --entrypoint "/bin/sh -c" certbot sh
 
+launch-on-local:
+	docker-compose -f docker-compose-local.yaml up 
+
+launch-on-server:
+	docker-compose -f docker-compose.yaml up 
