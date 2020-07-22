@@ -18,7 +18,7 @@ This docker-compose project is designed to streamline the process of building a 
 
 The way I designed this project you only need to change the domain name and email address variables essentially to get the docker running for your specific domain.
 
-The docker-compose runs 4 services (scraper, dash_app, nignx and certbot):
+The docker-compose runs 4 services (scraper, dash_app, certbot and nginx):
 
 ### Scraper
 Scrapy is a python library for web scraping at scale. It is asynchronous and can scrape large quantities at speed.
