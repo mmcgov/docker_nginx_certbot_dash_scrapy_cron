@@ -25,14 +25,8 @@ services:
     entrypoint: ./entrypoint.sh
     ports:
         - 8000:8000
-    networks:
-        docker-network:
 
   certbot:
-    environment:
-       - email=${email}
-       - website=${website}
-       - website_short=${website_short}
     image: certbot/certbot
     volumes:
        - ./certbot/conf:/etc/letsencrypt
@@ -57,9 +51,3 @@ services:
           &&  while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     depends_on:
         - dash_app
-    networks:
-        - docker-network
-
-networks:
-      docker-network:
-
