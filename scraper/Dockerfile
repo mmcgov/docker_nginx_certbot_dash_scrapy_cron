@@ -24,9 +24,9 @@ RUN pip3 install -r ./requirements/base_requirements.txt
 
 RUN chmod 755 ./scripts/entrypoint.sh 
 RUN chmod 755 ./scripts/run.sh
-COPY ./scripts/scraper_scheduler /etc/cron.d/scraper_scheduler
-RUN chmod 755 /etc/cron.d/scraper_scheduler
-RUN crontab /etc/cron.d/scraper_scheduler
+COPY ./scripts/cron_scheduler /etc/cron.d/cron_scheduler
+RUN chmod 755 /etc/cron.d/cron_scheduler
+RUN crontab /etc/cron.d/cron_scheduler
 RUN service cron start
 
 ENTRYPOINT ["./scripts/entrypoint.sh"]
