@@ -87,6 +87,7 @@ class scraper(scrapy.Spider):
         Returns
         csv files: list of all the covid data on site
         """
+
         # appending new daily data to master data
         self.case_data = '/home/data/covid_19_case_data.csv'
         self.graph_data = '/home/data/graph_data.csv'
