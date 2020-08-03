@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python3
 import scrapy
 import pandas as pd
 from datetime import datetime
@@ -35,7 +35,8 @@ class scraper(scrapy.Spider):
         response: url response which is then passed into the parse function
         """
 
-        yield scrapy.Request('https://www.worldometers.info/coronavirus/#countries',
+        yield scrapy.Request(''.join('https://www.worldometers.info/',
+                                     'coronavirus/#countries'),
                              callback=self.parse)
 
     def parse(self, response):
