@@ -1,6 +1,9 @@
 # docker-compose nginx certbot dash scrapy<br>
 
 ## Quick start guide:
+NOTE: This docker has been setup with the example case of scraping covid19 data from https://www.worldometers.info/coronavirus/#countries
+and then displaying these on a website using plotly dash. However it can easily be customised to collect data from any site on a regular scheduled basis and then display this data via a website using plotly dash.
+<br>
 1) Git clone this repo
 2) Move the env file to `.env`
 3) change the email and domain variables in this `.env` file to your personal values
@@ -15,9 +18,6 @@ If using copy of this repo locally ensure below files are removed so as to avoid
 1) Run `rm -r certbot/*` this will clean out the certbot docker and when you docker compose up it will take from files from the official certbot image for your specific site.
 2) Also the app.conf file in the nginx folder should be cleaned and elft empty to be repopulated by the template file when you docker compose up. It should overwrite but just in case best to clean out the app.conf file and leave it as an empty file.
 
-### Example Case:
-Please note this docker has been setup with the example case of scraping covid19 data from https://www.worldometers.info/coronavirus/#countries
-and then displaying these on a website using plotly dash.
 
 
 ## Summary
