@@ -15,6 +15,11 @@ If using copy of this repo locally ensure below files are removed so as to avoid
 1) Run `rm -r certbot/*` this will clean out the certbot docker and when you docker compose up it will take from files from the official certbot image for your specific site.
 2) Also the app.conf file in the nginx folder should be cleaned and elft empty to be repopulated by the template file when you docker compose up. It should overwrite but just in case best to clean out the app.conf file and leave it as an empty file.
 
+### Example Case:
+Please note this docker has been setup with the example case of scraping covid19 data from https://www.worldometers.info/coronavirus/#countries
+and then displaying these on a website using plotly dash.
+
+
 ## Summary
 This docker-compose project is designed to streamline the process of building a multicontainer project where for example a scraper is collecting data at regular intervals whcih is then being visualized on a dash/flask website with full ssl encryption.
 
